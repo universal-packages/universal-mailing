@@ -1,5 +1,6 @@
 import { resolveAdapter } from '@universal-packages/adapter-resolver'
 import path from 'path'
+
 import LocalEngine from './LocalEngine'
 import { EngineInterface, EngineInterfaceClass, MailingOptions, RendererInterface, RendererInterfaceClass, SendOptions } from './Mailing.types'
 import ReplacerRenderer from './ReplacerRenderer'

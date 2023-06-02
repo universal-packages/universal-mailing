@@ -1,5 +1,6 @@
-import open from 'open'
 import fs from 'fs'
+import open from 'open'
+
 import { LocalEngine } from '../src'
 
 const writeFileSync = jest.spyOn(fs, 'writeFileSync').mockImplementation()

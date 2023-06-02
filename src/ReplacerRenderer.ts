@@ -1,7 +1,8 @@
 import { replaceEnv, replaceVars } from '@universal-packages/variable-replacer'
 import fs from 'fs'
 import path from 'path'
-import { RendererInterface, RenderResult } from './Mailing.types'
+
+import { RenderResult, RendererInterface } from './Mailing.types'
 import { ReplacerRendererOptions } from './ReplacerRenderer.types'
 
 export default class ReplacerRenderer implements RendererInterface {
