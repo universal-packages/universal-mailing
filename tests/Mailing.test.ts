@@ -17,6 +17,33 @@ describe('Mailing', (): void => {
     })
   })
 
+  it('appends locale to template path', async (): Promise<void> => {
+    const mailer = new Mailing({ templatesLocation: './tests/__fixtures__' })
+    await mailer.prepare()
+
+    await mailer.send({ subject: 'Welcome', template: 'welcome-email', locale: 'es', locals: { local: '123' } })
+
+    expect(TestEngine.mock).toHaveBeenCalledWith({
+      template: 'tests/__fixtures__/welcome-email.es',
+      subject: 'Welcome',
+      locale: 'es',
+      locals: { local: '123' },
+      html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+      text: 'This is a test email 123\n'
+    })
+
+    await mailer.send({ subject: 'Welcome', template: 'welcome-email', locale: 'en', locals: { local: '123' } })
+
+    expect(TestEngine.mock).toHaveBeenCalledWith({
+      template: 'tests/__fixtures__/welcome-email.en',
+      subject: 'Welcome',
+      locale: 'en',
+      locals: { local: '123' },
+      html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+      text: 'This is a test email 123\n'
+    })
+  })
+
   it('Sets adapters from string', async (): Promise<void> => {
     const mailer = new Mailing({ templatesLocation: './tests/__fixtures__', engine: 'local', renderer: 'replacer' })
     await mailer.prepare()

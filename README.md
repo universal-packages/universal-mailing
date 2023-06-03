@@ -62,6 +62,8 @@ Sends an email using the configured engine.
   The e-mail address of the sender. All e-mail addresses can be plain 'sender@server.com' or formatted 'Sender Name <sender@server.com>'.
 - **`html`** `String`
   The HTML version of the message.
+- **``locale``** `String`
+  If provided this locale will be appended to the template name. ex `templates/email.en`
 - **`locals`** `Object`
   Variables to be passed to the renderer to evaluate on templates.
 - **`sender`** `String`

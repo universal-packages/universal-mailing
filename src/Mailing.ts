@@ -30,10 +30,11 @@ export default class Mailing {
     let finalOptions = options
 
     if (options.template) {
-      const finalTemplatePath = path.isAbsolute(options.template) ? options.template : path.join(this.options.templatesLocation, options.template)
-      const renderResult = await this.renderer.render(finalTemplatePath, options.locals)
+      const templatePath = path.isAbsolute(options.template) ? options.template : path.join(this.options.templatesLocation, options.template)
+      const templatePathWithLocale = options.locale ? `${templatePath}.${options.locale}` : templatePath
+      const renderResult = await this.renderer.render(templatePathWithLocale, options.locals)
 
-      finalOptions = { ...finalOptions, template: finalTemplatePath, ...renderResult }
+      finalOptions = { ...finalOptions, template: templatePathWithLocale, ...renderResult }
     }
 
     await this.engine.send(finalOptions)

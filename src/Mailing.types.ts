@@ -14,6 +14,7 @@ export interface SendOptions {
   extra?: Record<string, any>
   from?: string
   html?: string
+  locale?: string
   locals?: Record<string, any>
   sender?: string
   subject?: string
