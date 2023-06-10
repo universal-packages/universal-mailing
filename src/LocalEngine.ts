@@ -36,7 +36,11 @@ export default class LocalEngine implements EngineInterface {
           .top { border-bottom: 2px gray solid; padding: 10px; }
           .info { display: flex; flex-direction: row; }
           .info > p { margin-right: 20px; }
-          body { margin: 0 }
+          body { margin: 0; height: 100vh; display: flex; flex-direction: column; }
+          .mails { display: flex; flex-direction: column; flex-grow: 2;}
+          .mails > .html { display: flex; flex-direction: column; flex-grow: 2; }
+          .mails > .html > iframe { width: 100%; flex-grow: 2; }
+          .mails > .text {  flex-grow: 1; }
         </style>
       </head>
       <body>
@@ -54,11 +58,13 @@ export default class LocalEngine implements EngineInterface {
             ${options.bcc ? `<p><b>bcc:</b> ${options.bcc}</p>` : ''}
           </div>
         </div>
-        <div>
-          ${options.html ? `<h2>html:</h2><iframe srcdoc="${options.html.replace(/(\<.* .+=)\"(.*)\"/g, '$1$2').replace(/\"/g, '&quot;').replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>` : ''}
-        </div>
-        <div>
-          ${options.text ? `<h2>text:</h2><div>${options.text}</div>` : ''}
+        <div class="mails">
+          <div class="html">
+            ${options.html ? `<h2>html:</h2><iframe srcdoc="${options.html.replace(/="([^"]*)"/g, '=$1').replace(/\"/g, '&quot;').replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>` : ''}
+          </div>
+          <div class="text">
+            ${options.text ? `<h2>text:</h2><div>${options.text}</div>` : ''}
+          </div>
         </div>
       </body>
     </html>
