@@ -55,7 +55,7 @@ export default class LocalEngine implements EngineInterface {
           </div>
         </div>
         <div>
-          ${options.html ? `<h2>html:</h2><iframe srcdoc="${options.html}" style="width: 100%;"></iframe>` : ''}
+          ${options.html ? `<h2>html:</h2><iframe srcdoc="${options.html.replace(/(\<.* .+=)\"(.*)\"/g, '$1$2').replace(/\"/g, '&quot;').replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>` : ''}
         </div>
         <div>
           ${options.text ? `<h2>text:</h2><div>${options.text}</div>` : ''}
