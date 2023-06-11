@@ -39,7 +39,7 @@ export default class LocalEngine implements EngineInterface {
           body { margin: 0; height: 100vh; display: flex; flex-direction: column; }
           .mails { display: flex; flex-direction: column; flex-grow: 2;}
           .mails > .html { display: flex; flex-direction: column; flex-grow: 2; }
-          .mails > .html > iframe { width: 100%; flex-grow: 2; }
+          .mails > .html > iframe { width: 100%; flex-grow: 2; height: 700px; }
           .mails > .text {  flex-grow: 1; }
         </style>
       </head>
@@ -65,12 +65,12 @@ export default class LocalEngine implements EngineInterface {
                 ? `<h2>html:</h2><iframe srcdoc="${options.html
                     .replace(/="([^"]*)"/g, '=$1')
                     .replace(/\"/g, '&quot;')
-                    .replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>`
+                    .replace(/\&/g, '&amp;amp;')}"></iframe>`
                 : ''
             }
           </div>
           <div class="text">
-            ${options.text ? `<h2>text:</h2><div>${(options.text || '').split('\n').join('<br>')}</div>` : ''}
+            ${options.text ? `<h2>text:</h2><div>${(options.text || '').split('\n').join('<br>')}</div>` : ''}.
           </div>
         </div>
       </body>
