@@ -60,10 +60,17 @@ export default class LocalEngine implements EngineInterface {
         </div>
         <div class="mails">
           <div class="html">
-            ${options.html ? `<h2>html:</h2><iframe srcdoc="${options.html.replace(/="([^"]*)"/g, '=$1').replace(/\"/g, '&quot;').replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>` : ''}
+            ${
+              options.html
+                ? `<h2>html:</h2><iframe srcdoc="${options.html
+                    .replace(/="([^"]*)"/g, '=$1')
+                    .replace(/\"/g, '&quot;')
+                    .replace(/\&/g, '&amp;amp;')}" style="width: 100%;"></iframe>`
+                : ''
+            }
           </div>
           <div class="text">
-            ${options.text ? `<h2>text:</h2><div>${options.text}</div>` : ''}
+            ${options.text ? `<h2>text:</h2><div>${(options.text || '').split('\n').join('<br>')}</div>` : ''}
           </div>
         </div>
       </body>
