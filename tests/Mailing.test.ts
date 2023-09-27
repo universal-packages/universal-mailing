@@ -1,6 +1,6 @@
 import { LocalEngine, Mailing, ReplacerRenderer, TestEngine } from '../src'
 
-describe('Mailing', (): void => {
+describe(Mailing, (): void => {
   it('It uses default renderer and engine to send an email', async (): Promise<void> => {
     const mailer = new Mailing({ templatesLocation: './tests/__fixtures__' })
     await mailer.prepare()

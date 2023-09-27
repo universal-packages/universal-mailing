@@ -5,7 +5,7 @@ import { LocalEngine } from '../src'
 
 const writeFileSync = jest.spyOn(fs, 'writeFileSync').mockImplementation()
 
-describe('LocalMailer', (): void => {
+describe(LocalEngine, (): void => {
   it('writes the right content into a file and opens it', async (): Promise<void> => {
     const engine = new LocalEngine()
 
