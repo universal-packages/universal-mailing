@@ -42,7 +42,8 @@ export default class Mailing {
 
   private async setEngine(): Promise<void> {
     if (typeof this.options.engine === 'string') {
-      const AdapterModule = await resolveAdapter<EngineInterfaceClass>(this.options.engine, {
+      const AdapterModule = await resolveAdapter<EngineInterfaceClass>({
+        name: this.options.engine,
         domain: 'mailing',
         type: 'engine',
         internal: { test: TestEngine, local: LocalEngine }
@@ -55,7 +56,12 @@ export default class Mailing {
 
   private async setRenderer(): Promise<void> {
     if (typeof this.options.renderer === 'string') {
-      const AdapterModule = await resolveAdapter<RendererInterfaceClass>(this.options.renderer, { domain: 'mailing', type: 'renderer', internal: { replacer: ReplacerRenderer } })
+      const AdapterModule = await resolveAdapter<RendererInterfaceClass>({
+        name: this.options.renderer,
+        domain: 'mailing',
+        type: 'renderer',
+        internal: { replacer: ReplacerRenderer }
+      })
       this.renderer = new AdapterModule(this, this.options.rendererOptions)
     } else {
       this.renderer = this.options.renderer
