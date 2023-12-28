@@ -62,7 +62,7 @@ Sends an email using the configured engine.
   The e-mail address of the sender. All e-mail addresses can be plain 'sender@server.com' or formatted 'Sender Name <sender@server.com>'.
 - **`html`** `String`
   The HTML version of the message.
-- **``locale``** `String`
+- **`locale`** `String`
   If provided this locale will be appended to the template name. ex `templates/email.en`
 - **`locals`** `Object`
   Variables to be passed to the renderer to evaluate on templates.
@@ -107,6 +107,15 @@ You will need to set the mock manually depending on the test framework you are u
 import { TestEngine } from '@universal-packages/mailing'
 
 TestEngine.mock = jest.fn()
+```
+
+## Events
+
+`Mailing` will emit events as follow.
+
+```js
+expressApp.on('send:start', (event) => console.log(event))
+expressApp.on('send:end', (event) => console.log(event))
 ```
 
 ## Typescript
