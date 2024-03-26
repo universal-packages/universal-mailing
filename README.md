@@ -114,8 +114,8 @@ TestEngine.mock = jest.fn()
 `Mailing` will emit events as follow.
 
 ```js
-expressApp.on('send:start', (event) => console.log(event))
-expressApp.on('send:end', (event) => console.log(event))
+mailing.on('send:start', (event) => console.log(event))
+mailing.on('send:end', (event) => console.log(event))
 ```
 
 ## Typescript
