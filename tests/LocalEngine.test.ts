@@ -11,7 +11,7 @@ describe(LocalEngine, (): void => {
 
     await engine.send({ subject: 'Welcome', html: 'html-content', text: 'text-content' })
 
-    expect(writeFileSync).toBeCalledWith(expect.stringMatching(/\/tmp\/mail.*.html/), expect.any(Buffer))
+    expect(writeFileSync).toHaveBeenCalledWith(expect.stringMatching(/\/tmp\/mail.*.html/), expect.any(Buffer))
     expect(open).toHaveBeenCalledWith(expect.stringMatching(/\/tmp\/mail.*.html/))
   })
 })
