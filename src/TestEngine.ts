@@ -1,13 +1,13 @@
 import { EngineInterface, SendOptions } from './Mailing.types'
 
 export default class TestEngine implements EngineInterface {
-  public static mock: any
+  public static sendHistory: SendOptions[] = []
 
-  public static setMock(mock: any): void {
-    this.mock = mock
+  public static reset() {
+    TestEngine.sendHistory = []
   }
 
   public async send(options: SendOptions): Promise<void> {
-    if (TestEngine.mock) TestEngine.mock(options)
+    TestEngine.sendHistory.push(options)
   }
 }

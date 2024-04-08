@@ -1,9 +1,7 @@
 import { LocalEngine, Mailing, ReplacerRenderer, TestEngine } from '../src'
 
-TestEngine.mock = jest.fn()
-
 beforeEach((): void => {
-  TestEngine.mock.mockClear()
+  TestEngine.reset()
 })
 
 describe(Mailing, (): void => {
@@ -17,14 +15,15 @@ describe(Mailing, (): void => {
 
     await mailer.send({ subject: 'Welcome', template: 'welcome-email', locals: { local: '123' } })
 
-    expect(TestEngine.mock).toHaveBeenCalled()
-    expect(TestEngine.mock).toHaveBeenCalledWith({
-      template: 'tests/__fixtures__/welcome-email',
-      subject: 'Welcome',
-      locals: { local: '123' },
-      html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
-      text: 'This is a test email 123\n'
-    })
+    expect(TestEngine.sendHistory).toEqual([
+      {
+        template: 'tests/__fixtures__/welcome-email',
+        subject: 'Welcome',
+        locals: { local: '123' },
+        html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+        text: 'This is a test email 123\n'
+      }
+    ])
     expect(listener.mock.calls).toEqual([
       [
         {
@@ -65,25 +64,38 @@ describe(Mailing, (): void => {
 
     await mailer.send({ subject: 'Welcome', template: 'welcome-email', locale: 'es', locals: { local: '123' } })
 
-    expect(TestEngine.mock).toHaveBeenCalledWith({
-      template: 'tests/__fixtures__/welcome-email.es',
-      subject: 'Welcome',
-      locale: 'es',
-      locals: { local: '123' },
-      html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
-      text: 'This is a test email 123\n'
-    })
+    expect(TestEngine.sendHistory).toEqual([
+      {
+        template: 'tests/__fixtures__/welcome-email.es',
+        subject: 'Welcome',
+        locale: 'es',
+        locals: { local: '123' },
+        html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+        text: 'This is a test email 123\n'
+      }
+    ])
 
     await mailer.send({ subject: 'Welcome', template: 'welcome-email', locale: 'en', locals: { local: '123' } })
 
-    expect(TestEngine.mock).toHaveBeenCalledWith({
-      template: 'tests/__fixtures__/welcome-email.en',
-      subject: 'Welcome',
-      locale: 'en',
-      locals: { local: '123' },
-      html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
-      text: 'This is a test email 123\n'
-    })
+    expect(TestEngine.sendHistory).toEqual([
+      {
+        template: 'tests/__fixtures__/welcome-email.es',
+        subject: 'Welcome',
+        locale: 'es',
+        locals: { local: '123' },
+        html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+        text: 'This is a test email 123\n'
+      },
+      {
+        template: 'tests/__fixtures__/welcome-email.en',
+        subject: 'Welcome',
+        locale: 'en',
+        locals: { local: '123' },
+        html: '<html>\n  <body>\n    <p>\n  This is a test email 123\n</p>\n\n  </body>\n</html>\n',
+        text: 'This is a test email 123\n'
+      }
+    ])
+
     expect(listener.mock.calls).toEqual([
       [
         {
