@@ -20,7 +20,7 @@ export default class LocalEngine implements EngineInterface {
       .digest('hex')
     const fileName = `mail.${hash}.html`
     const saveLocation = path.join(this.options.saveLocation, fileName)
-    fs.writeFileSync(saveLocation, Buffer.from(this.buildFrame(hash, saveLocation, options)))
+    fs.writeFileSync(saveLocation, Buffer.from(this.buildFrame(hash, saveLocation, options)).toString())
 
     await open(saveLocation)
   }
